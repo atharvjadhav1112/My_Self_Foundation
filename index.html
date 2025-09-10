@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Self Foundation - Empowering Communities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom creative styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(59, 130, 246, 0.2)), url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3570a4e1-0953-44cb-8855-1766c9a4811b.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+        }
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .slide-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        .slide-in.show {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+        .card-3d {
+            perspective: 1000px;
+        }
+        .card-3d .inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        .card-3d:hover .inner {
+            transform: rotateY(180deg);
+        }
+        .card-3d .front, .card-3d .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+        }
+        .card-3d .back {
+            transform: rotateY(180deg);
+            background: linear-gradient(45deg, #22c55e, #3b82f6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #22c55e, #3b82f6);
+            width: 0%;
+            z-index: 1000;
+        }
+        .carousel-inner {
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel-item {
+            display: none;
+        }
+        .carousel-item.active {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .hero-text { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Progress Bar -->
+    <div id="progress-bar" class="progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-800"><i class="fas fa-hands-helping text-green-600"></i> My Self Foundation</h1>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#home" class="text-gray-700 hover:text-green-600 transition relative group"><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 transition-all group-hover:w-full"></span>Home</a></li>
+                <li><a href="#about" class="text-gray-700 hover:text-green-600 transition relative group"><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 transition-all group-hover:w-full"></span>About</a></li>
+                <li><a href="#mission" class="text-gray-700 hover:text-green-600 transition relative group"><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 transition-all group-hover:w-full"></span>Mission</a></li>
+                <li><a href="#projects" class="text-gray-700 hover:text-green-600 transition relative group"><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 transition-all group-hover:w-full"></span>Projects</a></li>
+                <li><a href="#get-involved" class="text-gray-700 hover:text-green-600 transition relative group"><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 transition-all group-hover:w-full"></span>Get Involved</a></li>
+                <li><a href="#team" class="text-gray-700 hover:text-green-600 transition relative group"><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 transition-all group-hover:w-full"></span>Team</a></li>
+                <li><a href="#contact" class="text-gray-700 hover:text-green-600 transition relative group"><span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-600 transition-all group-hover:w-full"></span>Contact</a></li>
+            </ul>
+            <button class="md:hidden text-gray-700" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <ul class="px-4 py-2 space-y-2">
+                <li><a href="#home" class="block text-gray-700 hover:text-green-600">Home</a></li>
+                <li><a href="#about" class="block text-gray-700 hover:text-green-600">About</a></li>
+                <li><a href="#mission" class="block text-gray-700 hover:text-green-600">Mission</a></li>
+                <li><a href="#projects" class="block text-gray-700 hover:text-green-600">Projects</a></li>
+                <li><a href="#get-involved" class="block text-gray-700 hover:text-green-600">Get Involved</a></li>
+                <li><a href="#team" class="block text-gray-700 hover:text-green-600">Team</a></li>
+                <li><a href="#contact" class="block text-gray-700 hover:text-green-600">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-center text-white px-4 relative">
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div class="max-w-4xl z-10">
+            <h2 class="hero-text text-5xl md:text-7xl font-bold mb-4 floating-animation">Empowering Communities, <br>Building Futures</h2>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">Join us in creating sustainable change through compassion, innovation, and collaboration.</p>
+            <a href="#about" class="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-10 py-4 rounded-full text-lg transition transform hover:scale-105 shadow-lg">Explore Our Work</a>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white">
+            <i class="fas fa-chevron-down bouncing text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 bg-white slide-in">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-5xl font-bold text-center text-blue-800 mb-12">About Us</h2>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9be5c837-10e3-4b7b-a473-0ced8760227b.png" alt="Diverse group of people from various backgrounds united in a joyful community gathering, sharing smiles and stories in a bright outdoor setting with elements of togetherness like group hugs and hopeful expressions symbolizing collective strength and unity" class="rounded-lg shadow-2xl transform hover:scale-105 transition" />
+                </div>
+                <div class="space-y-6">
+                    <p class="text-lg leading-relaxed">My Self Foundation is a beacon of hope, dedicated to uplifting underserved communities worldwide. Born from a passion for social justice, we've transformed ideas into action since our founding.</p>
+                    <div class="grid grid-cols-2 gap-4 my-8">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-green-600">1000+</div>
+                            <p class="text-sm">Lives Impacted</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-blue-600">50+</div>
+                            <p class="text-sm">Projects Completed</p>
+                        </div>
+                    </div>
+                    <p class="text-lg leading-relaxed">Our diverse team of changemakers works tirelessly to address global challenges through education, health, and sustainability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section id="mission" class="py-20 px-4 bg-gradient-to-r from-gray-100 to-white slide-in">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-5xl font-bold text-center text-blue-800 mb-16">Our Mission Pillars</h2>
+            <div class="flex justify-center mb-8">
+                <div class="flex space-x-4">
+                    <button id="tab1" class="tab-btn active bg-green-600 text-white px-6 py-2 rounded-full transition" onclick="openTab(1)">Education</button>
+                    <button id="tab2" class="tab-btn bg-gray-300 text-gray-700 px-6 py-2 rounded-full transition" onclick="openTab(2)">Health</button>
+                    <button id="tab3" class="tab-btn bg-gray-300 text-gray-700 px-6 py-2 rounded-full transition" onclick="openTab(3)">Sustainability</button>
+                </div>
+            </div>
+            <div id="tab-content1" class="tab-content">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0d4afd80-abd3-404a-afae-beacb3bf7a85.png" alt="Engaging classroom scene with students of diverse ages actively learning through interactive methods, surrounded by colorful educational materials, kind teachers, and an atmosphere of curiosity and empowerment in a welcoming school environment" class="rounded-lg shadow-lg" />
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-semibold text-green-700 mb-4">Education for All</h3>
+                        <p class="text-lg mb-6">We're breaking barriers to ensure every child has access to quality education, from rural schools to digital learning platforms.</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Building smart classrooms</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>Providing scholarships</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-600 mr-3"></i>STEM programs for girls</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="tab-content2" class="tab-content hidden">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cbedc174-021c-44f8-8a9c-c11fc564f4ee.png" alt="Warm healthcare facility with caring doctors and nurses assisting patients in a clean, supportive space, featuring medical equipment, smiling faces, and a focus on healing and community well-being" class="rounded-lg shadow-lg" />
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-semibold text-blue-700 mb-4">Health & Well-being</h3>
+                        <p class="text-lg mb-6">Comprehensive healthcare initiatives to improve lives and build resilient communities.</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><i class="fas fa-plus text-green-600 mr-3"></i>Mobile clinics</li>
+                            <li class="flex items-center"><i class="fas fa-plus text-green-600 mr-3"></i>Mental health support</li>
+                            <li class="flex items-center"><i class="fas fa-plus text-green-600 mr-3"></i>Nutrition programs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="tab-content3" class="tab-content hidden">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0da750c2-8803-4bf6-8419-2ce36ad2e5fc.png" alt="Lush sustainable landscape with volunteers planting trees and installing eco-tech, showcasing green technologies, community participation, and a commitment to environmental renewal and clean energy" class="rounded-lg shadow-lg" />
+                    </div>
+                    <div>
+                        <h3 class="text-3xl font-semibold text-green-700 mb-4">Sustainable Development</h3>
+                        <p class="text-lg mb-6">Creating eco-friendly solutions for long-term prosperity and environmental stewardship.</p>
+                        <ul class="space-y-2">
+                            <li class="flex items-center"><i class="fas fa-leaf text-green-600 mr-3"></i>Renewable energy projects</li>
+                            <li class="flex items-center"><i class="fas fa-leaf text-green-600 mr-3"></i>Reforestation initiatives</li>
+                            <li class="flex items-center"><i class="fas fa-leaf text-green-600 mr-3"></i>Waste management</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 bg-white slide-in">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-5xl font-bold text-center text-blue-800 mb-16">Our Impactful Projects</h2>
+            <div class="carousel-inner relative">
+                <div class="carousel-item active">
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/edddc03e-a095-4909-adb4-75d27b55ce04.png" alt="Active construction scene at a school site with builders, volunteers, and local children observing, featuring construction materials, tools, cranes, and a sense of progress and community investment in education" class="rounded-xl shadow-xl" />
+                        <div>
+                            <h3 class="text-4xl font-semibold text-green-700 mb-4">School Building Initiative</h3>
+                            <p class="text-lg mb-6">Transforming education infrastructure with innovative designs and technology integration.</p>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h3 class="text-4xl font-semibold text-blue-700 mb-4">Health Camps</h3>
+                            <p class="text-lg mb-6">Bringing healthcare to remote areas through mobile units and telemedicine solutions.</p>
+                            <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg transition">Learn More</button>
+                        </div>
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5a86186a-9fae-4348-bf45-de75ef2c9ece.png" alt="Group medical check-up in a tented health camp, with doctors examining patients surrounded by medical supplies, grateful families, and a rural backdrop emphasizing care and accessibility to healthcare services" class="rounded-xl shadow-xl" />
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/569b376d-e689-41e2-8c5e-e1c20612e6b8.png" alt="Solar panel installation on rooftops with technicians, sparkling panels under sunlight, eco-friendly symbols like trees and windmills, representing innovation in renewable energy and community sustainability" class="rounded-xl shadow-xl" />
+                        <div>
+                            <h3 class="text-4xl font-semibold text-green-700 mb-4">Clean Energy Revolution</h3>
+                            <p class="text-lg mb-6">Empowering communities with solar power, reducing carbon footprint and improving quality of life.</p>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition">Explore Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center mt-8 space-x-4">
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-full" onclick="prevSlide()">&larr;</button>
+                <button class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-full" onclick="nextSlide()">&rarr;</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Involved Section -->
+    <section id="get-involved" class="py-20 px-4 bg-gradient-to-r from-green-100 to-blue-100 slide-in">
+        <div class="container mx-auto max-w-6xl text-center">
+            <h2 class="text-5xl font-bold text-blue-800 mb-8">Get Involved</h2>
+            <p class="text-lg mb-12">Your support is vital to our mission. Whether through volunteering, partnerships, or spreading the word, every contribution counts.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e139db22-ce87-4f97-8a85-c6f028bc2c9b.png" alt="Volunteers smiling together at a community event, engaging in activities like painting murals, with backpacks, tools, and a vibrant atmosphere representing active participation and team spirit in helping others" class="rounded mb-4" />
+                    <h3 class="text-2xl font-semibold text-green-700 mb-2">Volunteer</h3>
+                    <p class="mb-4">Join our team of passionate volunteers and make a direct impact in the field.</p>
+                    <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded transition" onclick="showVolunteerForm()">Apply Now</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a81a51f5-1d15-4670-a9cf-c3c24f25d88e.png" alt="Professional meeting with business representatives and NGO leaders collaborating, shaking hands in a conference room, with laptops, charts, and signs of mutual cooperation for sustainable partnerships" class="rounded mb-4" />
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-2">Partner With Us</h3>
+                    <p class="mb-4">Collaborate with organizations, businesses, or individuals for greater reach.</p>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition" onclick="showPartnershipForm()">Connect</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c3edbd01-6d2c-407b-b3a3-2b5dad3e745d.png" alt="People sharing information on social media, holding phones with hearts and share icons, in a diverse gathering highlighting communication, inspiration, and community engagement for spreading positive change" class="rounded mb-4" />
+                    <h3 class="text-2xl font-semibold text-green-700 mb-2">Spread the Word</h3>
+                    <p class="mb-4">Help us reach more people by sharing our story and initiatives.</p>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition" onclick="shareOnSocial()">Share</button>
+                </div>
+            </div>
+            <!-- Hidden Forms -->
+            <div id="volunteer-form" class="hidden mt-8">
+                <form class="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+                    <h4 class="text-xl font-bold mb-4">Volunteer Application</h4>
+                    <input type="text" placeholder="Your Name" class="w-full p-3 mb-4 border rounded" required>
+                    <input type="email" placeholder="Your Email" class="w-full p-3 mb-4 border rounded" required>
+                    <textarea placeholder="Tell us about your interests" class="w-full p-3 mb-4 border rounded" rows="4" required></textarea>
+                    <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Submit</button>
+                </form>
+            </div>
+            <div id="partnership-form" class="hidden mt-8">
+                <form class="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
+                    <h4 class="text-xl font-bold mb-4">Partnership Inquiry</h4>
+                    <input type="text" placeholder="Organization Name" class="w-full p-3 mb-4 border rounded" required>
+                    <input type="email" placeholder="Contact Email" class="w-full p-3 mb-4 border rounded" required>
+                    <textarea placeholder="Describe your interest" class="w-full p-3 mb-4 border rounded" rows="4" required></textarea>
+                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donations Section -->
+    <section id="donations" class="py-20 px-4 bg-white slide-in">
+        <div class="container mx-auto max-w-6xl text-center">
+            <h2 class="text-5xl font-bold text-blue-800 mb-8">Support Our Cause</h2>
+            <p class="text-lg mb-12">Your donations fuel our projects and help us create lasting change. Every contribution, big or small, makes a difference.</p>
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-gray-100 p-6 rounded-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dd0b2657-cb14-46bf-92b7-94655ed2001e.png" alt="Heart icon surrounded by dollar signs and giving symbols, representing one-time charitable contributions to support community and humanitarian efforts" class="rounded mb-4" />
+                    <h3 class="text-xl font-semibold text-green-700 mb-2">One-Time Donation</h3>
+                    <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded transition" onclick="openDonationModal('one-time')">Donate Now</button>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fdc3ccc9-b4ba-4c85-b1fd-28d35d6f4007.png" alt="Calendar icon with recurring contributions symbolized by coins and arrows pointing to hearts, indicating ongoing monthly donations for continuous support of sustainable community projects" class="rounded mb-4" />
+                    <h3 class="text-xl font-semibold text-blue-700 mb-2">Monthly Donor</h3>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition" onclick="openDonationModal('monthly')">Become a Supporter</button>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/219e80c7-b96c-4a9c-a2f1-da9e0852579a.png" alt="Handshake between a corporation and NGO, with buildings, logos, and partnership elements depicting corporate donations and sponsorship for larger impact initiatives" class="rounded mb-4" />
+                    <h3 class="text-xl font-semibold text-green-700 mb-2">Corporate Giving</h3>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded transition" onclick="openDonationModal('corporate')">Learn More</button>
+                </div>
+            </div>
+            <div class="bg-gradient-to-r from-green-500 to-blue-500 p-8 rounded-lg text-white">
+                <h3 class="text-2xl font-bold mb-4">Why Donations Matter</h3>
+                <p>Your generosity funds education programs, health services, and sustainable projects that transform lives. With your help, we reach more communities and create brighter futures.</p>
+            </div>
+            <!-- Donation Modal -->
+            <div id="donation-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+                <div class="bg-white p-6 rounded-lg max-w-md w-full mx-4">
+                    <h4 class="text-xl font-bold mb-4" id="modal-title"></h4>
+                    <form id="donation-form">
+                        <input type="number" placeholder="Amount ($)" class="w-full p-3 mb-4 border rounded" required min="1">
+                        <input type="text" placeholder="Your Name" class="w-full p-3 mb-4 border rounded" required>
+                        <input type="email" placeholder="Your Email" class="w-full p-3 mb-4 border rounded" required>
+                        <select class="w-full p-3 mb-4 border rounded" id="payment-method">
+                            <option>PayPal</option>
+                            <option>Credit Card</option>
+                            <option>Bank Transfer</option>
+                        </select>
+                        <button type="submit" class="w-full bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Process Donation</button>
+                        <button type="button" onclick="closeDonationModal()" class="w-full bg-gray-400 text-white px-6 py-2 rounded mt-2 hover:bg-gray-500">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section style="background-color: #f5f7fa; padding: 60px 0; text-align: center;">
+  <h2 style="color: #234abd; font-weight: 700; font-size: 2.5em; margin-bottom: 50px;">Meet Our Team</h2>
+  
+  <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 900px; margin: 0 auto;">
+
+    <div style="background: white; border-radius: 12px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); width: 210px; padding: 20px; text-align: center;">
+      <img src="your-image1.jpg" alt="Team Member 1" 
+           style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
+      <h3 style="margin: 0; font-size: 1.2em;">Jane Doe</h3>
+      <p style="color: #555; font-size: 0.9em; margin-top: 5px;">Project Manager</p>
+    </div>
+
+    <div style="background: white; border-radius: 12px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); width: 210px; padding: 20px; text-align: center;">
+      <img src="your-image2.jpg" alt="Team Member 2" 
+           style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
+      <h3 style="margin: 0; font-size: 1.2em;">John Smith</h3>
+      <p style="color: #555; font-size: 0.9em; margin-top: 5px;">UI/UX Designer</p>
+    </div>
+
+    <div style="background: white; border-radius: 12px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); width: 210px; padding: 20px; text-align: center;">
+      <img src="your-image3.jpg" alt="Team Member 3" 
+           style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
+      <h3 style="margin: 0; font-size: 1.2em;">Sara Lee</h3>
+      <p style="color: #555; font-size: 0.9em; margin-top: 5px;">Developer</p>
+    </div>
+
+    <div style="background: white; border-radius: 12px; box-shadow: 0 8px 15px rgba(0,0,0,0.1); width: 210px; padding: 20px; text-align: center;">
+      <img src="your-image4.jpg" alt="Team Member 4" 
+           style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px;">
+      <h3 style="margin: 0; font-size: 1.2em;">Mike Brown</h3>
+      <p style="color: #555; font-size: 0.9em; margin-top: 5px;">Marketing</p>
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 bg-white slide-in">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-5xl font-bold text-center text-blue-800 mb-16">Connect With Us</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-3xl font-semibold text-green-700 mb-6">Get In Touch</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-2xl text-blue-600 mr-4"></i>
+                            <p>123 Community Street, Hope City, HC 12345</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-2xl text-blue-600 mr-4"></i>
+                            <p>8007983109</p>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-2xl text-blue-600 mr-4"></i>
+                            <p>myselffoundationngo@gmail.com</p>
+                        </div>
+                        <div class="flex space-x-4 mt-8">
+                            <i class="fab fa-facebook text-3xl text-blue-600 hover:text-blue-800 cursor-pointer"></i>
+                            <i class="fab fa-twitter text-3xl text-blue-600 hover:text-blue-800 cursor-pointer"></i>
+                            <i class="fab fa-instagram text-3xl text-blue-600 hover:text-blue-800 cursor-pointer"></i>
+                        </div>
+                    </div>
+                </div>
+                <form id="contact-form" class="space-y-6">
+                    <input type="text" placeholder="Your Name" id="name" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" required />
+                    <input type="email" placeholder="Your Email" id="email" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" required />
+                    <textarea placeholder="Your Message" id="message" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" rows="5" required></textarea>
+                    <button type="submit" class="w-full bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white py-4 rounded-lg transition transform hover:scale-105">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-800 to-green-800 text-white py-10 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">My Self Foundation</h3>
+                    <p>Building bridges of hope and opportunity.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="hover:text-gray-300">About</a></li>
+                        <li><a href="#mission" class="hover:text-gray-300">Mission</a></li>
+                        <li><a href="#projects" class="hover:text-gray-300">Projects</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <p>myselffoundationngo@gmail.com</p>
+                    <p>8007983109</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <i class="fab fa-facebook text-2xl hover:text-gray-300 cursor-pointer"></i>
+                        <i class="fab fa-twitter text-2xl hover:text-gray-300 cursor-pointer"></i>
+                        <i class="fab fa-instagram text-2xl hover:text-gray-300 cursor-pointer"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <p>© 2023 My Self Foundation. All rights reserved. Crafted with love for a better world.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Scroll animations
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.intersectionRatio > 0) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+        document.querySelectorAll('.slide-in').forEach(el => observer.observe(el));
+
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const bar = document.getElementById('progress-bar');
+            const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            bar.style.width = scrolled + '%';
+        });
+
+        // Tab functionality
+        function openTab(tabNum) {
+            for (let i = 1; i <= 3; i++) {
+                const tab = document.getElementById(`tab${i}`);
+                const content = document.getElementById(`tab-content${i}`);
+                if (i === tabNum) {
+                    tab.classList.add('active');
+                    content.classList.remove('hidden');
+                } else {
+                    tab.classList.remove('active');
+                    content.classList.add('hidden');
+                }
+            }
+        }
+
+        // Carousel
+        let slideIndex = 0;
+        function showSlides() {
+            const slides = document.querySelectorAll('.carousel-item');
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[slideIndex].classList.add('active');
+        }
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % 3;
+            showSlides();
+        }
+        function prevSlide() {
+            slideIndex = (slideIndex - 1 + 3) % 3;
+            showSlides();
+        }
+        showSlides();
+
+        // Get Involved Form Toggles
+        function showVolunteerForm() {
+            document.getElementById('volunteer-form').classList.toggle('hidden');
+            document.getElementById('partnership-form').classList.add('hidden');
+        }
+        function showPartnershipForm() {
+            document.getElementById('partnership-form').classList.toggle('hidden');
+            document.getElementById('volunteer-form').classList.add('hidden');
+        }
+        function shareOnSocial() {
+            alert('Share our story on your social media!');
+        }
+
+        // Donation Modal
+        function openDonationModal(type) {
+            document.getElementById('modal-title').textContent = `${type.replace('-', ' ').toUpperCase()} DONATION`;
+            document.getElementById('donation-modal').classList.remove('hidden');
+        }
+        function closeDonationModal() {
+            document.getElementById('donation-modal').classList.add('hidden');
+        }
+
+        // Form submissions
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                alert('Thank you! Your submission has been received.');
+                form.reset();
+                if (form.id === 'donation-form') closeDonationModal();
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Bouncing animation
+        document.styleSheets[0].insertRule('.bouncing { animation: bounce 2s infinite; }', 0);
+        document.styleSheets[0].insertRule('@keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-30px); } 60% { transform: translateY(-15px); } }', 0);
+    </script>
+</body>
+</html>
+</content>
+</create_file>
